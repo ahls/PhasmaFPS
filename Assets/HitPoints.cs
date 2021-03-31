@@ -20,7 +20,7 @@ public class HitPoints : MonoBehaviour
 
     #region setups
     public void init()
-    {
+    {ad
         currentHP = maxHP;
     }
     public void init(float newHealth)
