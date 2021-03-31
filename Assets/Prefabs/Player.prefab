@@ -1433,12 +1433,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  gravity: -19.62
+  gravity: -40
   rotationSpeed: 140
   camera: {fileID: 4781233697626790052}
   jumpHeight: 4
   groundCheck: {fileID: 1188188152}
-  groundDistance: 0.4
+  groundDistance: 0.8
   groundMask:
     serializedVersion: 2
     m_Bits: 256
