@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 349157900}
   - component: {fileID: 349157899}
   - component: {fileID: 349157898}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 556341659}
   - component: {fileID: 556341658}
   - component: {fileID: 556341657}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 627772424}
   - component: {fileID: 627772423}
   - component: {fileID: 627772422}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 716033092}
   - component: {fileID: 716033091}
   - component: {fileID: 716033090}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 757566846}
   - component: {fileID: 757566845}
   - component: {fileID: 757566848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 781585153}
   - component: {fileID: 781585152}
   - component: {fileID: 781585151}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -798,7 +798,7 @@ GameObject:
   - component: {fileID: 848359571}
   - component: {fileID: 848359570}
   - component: {fileID: 848359569}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -879,12 +879,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 848359567}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &963194228 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4781233697626790052, guid: a9517a8a0b2603c47987da9c8e34bd44,
-    type: 3}
-  m_PrefabInstance: {fileID: 4781233698551182800}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1225264335
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,7 +891,7 @@ GameObject:
   - component: {fileID: 1225264339}
   - component: {fileID: 1225264338}
   - component: {fileID: 1225264337}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -990,7 +984,7 @@ GameObject:
   - component: {fileID: 1451115069}
   - component: {fileID: 1451115068}
   - component: {fileID: 1451115067}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1080,7 +1074,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1471286792}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1117,26 +1111,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4781233696695892500, guid: a9517a8a0b2603c47987da9c8e34bd44,
-        type: 3}
-      propertyPath: camera
-      value: 
-      objectReference: {fileID: 963194228}
-    - target: {fileID: 4781233696695892500, guid: a9517a8a0b2603c47987da9c8e34bd44,
-        type: 3}
-      propertyPath: rotationSpeed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4781233696695892501, guid: a9517a8a0b2603c47987da9c8e34bd44,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 4781233697626790052, guid: a9517a8a0b2603c47987da9c8e34bd44,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.178
-      objectReference: {fileID: 0}
     - target: {fileID: 5030771241900017711, guid: a9517a8a0b2603c47987da9c8e34bd44,
         type: 3}
       propertyPath: m_RootOrder
@@ -1150,7 +1124,7 @@ PrefabInstance:
     - target: {fileID: 5030771241900017711, guid: a9517a8a0b2603c47987da9c8e34bd44,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.26
+      value: 10.47
       objectReference: {fileID: 0}
     - target: {fileID: 5030771241900017711, guid: a9517a8a0b2603c47987da9c8e34bd44,
         type: 3}
