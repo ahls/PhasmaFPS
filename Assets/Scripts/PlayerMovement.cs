@@ -43,9 +43,9 @@ public class PlayerMovement : MonoBehaviour
 
         //Character movement
         float forwardMovement = Input.GetAxis("Vertical");
-        //float strafeMovement = Input.GetAxis("Horizontal");
+        float strafeMovement = Input.GetAxis("Horizontal");
 
-        Vector3 move = /*transform.right * strafeMovement + */ transform.forward * forwardMovement;
+        Vector3 move = transform.right * strafeMovement + transform.forward * forwardMovement;
         
         
         controller.Move(move * speed * Time.deltaTime);
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * gravity * -2);
         } 
-        else if(forwardMovement > 0 && Input.GetButton("Jump") && !isGrounded && nearWall)
+        else if(velocity.y < speed/2 && forwardMovement > 0 && Input.GetButton("Jump") && !isGrounded && nearWall)
         {
             velocity.y = speed/2;           //wall climbing section
         }
