@@ -11,14 +11,18 @@ public class PlayerMovement : MonoBehaviour
     public float jumpHeight = 4f;
 
     public Transform groundCheck;
+    public Transform wallCheck;
+    public float wallCheckHeight = 1.5f;
     public float groundDistance = 0.8f;
+    public float wallDistance = 1f;
     public LayerMask groundMask;
     public CharacterController controller;
     [SerializeField] private Animator _animator;
-    
+
     float xRotation = 0f;
     Vector3 velocity;
     bool isGrounded;
+    bool nearWall;
 
     void Start()
     {
@@ -52,7 +56,8 @@ public class PlayerMovement : MonoBehaviour
 
         //Gravity Implementation
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
+        nearWall = Physics.CheckCapsule(wallCheck.position - Vector3.up * wallCheckHeight, wallCheck.position + Vector3.up * wallCheckHeight, wallDistance, groundMask);
+        
         if(isGrounded && velocity.y < 0)
         {
             velocity.y = -5f;
@@ -61,6 +66,10 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * gravity * -2);
+        } 
+        else if(forwardMovement > 0 && Input.GetButton("Jump") && !isGrounded && nearWall)
+        {
+            velocity.y = speed/2;           //wall climbing section
         }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
