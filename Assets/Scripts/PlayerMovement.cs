@@ -44,7 +44,10 @@ public class PlayerMovement : MonoBehaviour
         //Character movement
         float forwardMovement = Input.GetAxis("Vertical");
         float strafeMovement = Input.GetAxis("Horizontal");
-
+        if(forwardMovement > 0 && Input.GetKey(KeyCode.LeftShift))
+        {//Sprint check
+            forwardMovement *= 1.5f;
+        }
         Vector3 move = transform.right * strafeMovement + transform.forward * forwardMovement;
         
         
