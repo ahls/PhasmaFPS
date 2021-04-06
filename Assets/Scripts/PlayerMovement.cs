@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.8f;
     public LayerMask groundMask;
     public CharacterController controller;
+    [SerializeField] private Animator _animator;
     
     float xRotation = 0f;
     Vector3 velocity;
@@ -41,8 +42,13 @@ public class PlayerMovement : MonoBehaviour
         //float strafeMovement = Input.GetAxis("Horizontal");
 
         Vector3 move = /*transform.right * strafeMovement + */ transform.forward * forwardMovement;
-
+        
+        
         controller.Move(move * speed * Time.deltaTime);
+
+
+        //animationPart
+        _animator.SetFloat("forwardMovement", forwardMovement);
 
         //Gravity Implementation
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);

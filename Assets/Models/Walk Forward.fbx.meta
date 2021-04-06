@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 420096f5f3fad954e992c9b95d56bfa5
+guid: 0bef74451fd63d24ba3549d87ced4cea
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: dash_forward
+    second: walkForward
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,18 +35,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: dash_forward
+      name: walkForward
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 22
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
