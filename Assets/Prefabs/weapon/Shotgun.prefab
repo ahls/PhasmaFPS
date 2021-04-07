@@ -39,6 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3816433183381795516}
+  - component: {fileID: 7980763477010200582}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -60,9 +61,32 @@ Transform:
   - {fileID: 5951967716875528380}
   - {fileID: 8681246136100314940}
   - {fileID: 7625866497678357268}
+  - {fileID: 1033961637105931850}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7980763477010200582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6418175715727592632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd5aea0c1f4a6a408fe9f573d486278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireRate: 100
+  range: 20
+  bulletSpread: 0
+  recoilAmount: 0
+  damage: 3
+  maxAmmo: 20
+  magazineSize: 2
+  leftGrip: {fileID: 8681246136100314940}
+  rightGrip: {fileID: 7625866497678357268}
+  fireLocation: {fileID: 1033961637105931850}
 --- !u!1 &6502411150506863886
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +116,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3816433183381795516}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8424985809171226951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1033961637105931850}
+  m_Layer: 0
+  m_Name: fireLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1033961637105931850
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8424985809171226951}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4.64}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3816433183381795516}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6130272551630802775
 PrefabInstance:

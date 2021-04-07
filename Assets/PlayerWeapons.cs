@@ -8,8 +8,12 @@ public class PlayerWeapons : MonoBehaviour
     private float fireTimer;
     [SerializeField] Camera cam;
     [SerializeField] Transform bulletImpact;
+    [SerializeField] Transform leftHand;
+    [SerializeField] Transform rightHand;
     [SerializeField] private Rig aimRig;
+    [SerializeField] Transform aimTarget;
     private ParticleSystem bulletImpactPS;
+    private Transform firelocation;
     private float lerpSpeed = 0.1f;
     // Start is called before the first frame update
     void Start()
@@ -43,7 +47,13 @@ public class PlayerWeapons : MonoBehaviour
 
     public void updateWeapon(weaponData newWeapon)
     {
-
+        _weaponData = newWeapon;
+        leftHand.position = newWeapon.leftGrip.position;
+        rightHand.position = newWeapon.rightGrip.position;
+        newWeapon.transform.parent = leftHand.parent;
+        newWeapon.transform.localPosition = Vector3.zero;
+        newWeapon.transform.localRotation = Quaternion.identity;
+        firelocation = newWeapon.fireLocation;
     }
 
 
@@ -51,7 +61,7 @@ public class PlayerWeapons : MonoBehaviour
     {
         fireTimer = 60 / _weaponData.fireRate; // cooldown is (60seconds / RPM)
         RaycastHit hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, _weaponData.range))
+        if (Physics.Raycast(firelocation.position, aimTarget.position - firelocation.position, out hit, _weaponData.range))
         {
             bulletImpact.position = hit.point;
             bulletImpact.rotation = Quaternion.LookRotation(transform.position - bulletImpact.position);
