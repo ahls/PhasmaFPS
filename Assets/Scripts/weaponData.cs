@@ -12,6 +12,9 @@ public class weaponData : MonoBehaviour
     public float damage;
     public int maxAmmo;
     public int magazineSize;
+    public Transform leftGrip;
+    public Transform rightGrip;
+
 
     public weaponData(float fr, float rng, float spread, float recoil, float dmg, int mxAm, int magSize)
     {
