@@ -2319,7 +2319,7 @@ GameObject:
   - component: {fileID: 1108654964}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2577,10 +2577,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 4781233697626790051}
   bulletImpact: {fileID: 2664804596206644269}
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
+  leftHand: {fileID: 767374742}
+  rightHand: {fileID: 1607063358}
   aimRig: {fileID: 1844020737}
-  aimTarget: {fileID: 0}
+  aimTarget: {fileID: 562727665}
 --- !u!1 &5822921156515960873
 GameObject:
   m_ObjectHideFlags: 0
