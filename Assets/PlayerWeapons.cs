@@ -15,10 +15,11 @@ public class PlayerWeapons : MonoBehaviour
     private ParticleSystem bulletImpactPS;
     private Transform firelocation;
     private float lerpSpeed = 0.1f;
+
+    public GameObject DebugItem;
     // Start is called before the first frame update
     void Start()
     {
-        _weaponData = new weaponData(300, 100, 0, 0, 10, 0, 0); // temp lines for testing
         bulletImpactPS = bulletImpact.GetComponent<ParticleSystem>();
     }
 
@@ -26,11 +27,14 @@ public class PlayerWeapons : MonoBehaviour
     void Update()
     {
         fireTimer -= Time.deltaTime;
-        if (Input.GetMouseButton(0)) // if left clicked
+        if (_weaponData != null)
         {
-            if (fireTimer <= 0)
+            if (Input.GetMouseButton(0)) // if left clicked
             {
-                fire();
+                if (fireTimer <= 0)
+                {
+                    fire();
+                }
             }
         }
         if(Input.GetMouseButton(1))
@@ -48,11 +52,11 @@ public class PlayerWeapons : MonoBehaviour
     public void updateWeapon(weaponData newWeapon)
     {
         _weaponData = newWeapon;
+        newWeapon.transform.parent = leftHand.parent;
+        newWeapon.transform.position = leftHand.parent.position;
+        newWeapon.transform.rotation = leftHand.parent.rotation;
         leftHand.position = newWeapon.leftGrip.position;
         rightHand.position = newWeapon.rightGrip.position;
-        newWeapon.transform.parent = leftHand.parent;
-        newWeapon.transform.localPosition = Vector3.zero;
-        newWeapon.transform.localRotation = Quaternion.identity;
         firelocation = newWeapon.fireLocation;
     }
 
@@ -60,18 +64,25 @@ public class PlayerWeapons : MonoBehaviour
     private void fire()
     {
         fireTimer = 60 / _weaponData.fireRate; // cooldown is (60seconds / RPM)
-        RaycastHit hit;
-        if (Physics.Raycast(firelocation.position, aimTarget.position - firelocation.position, out hit, _weaponData.range))
+        RaycastHit aimHit;
+        if(Physics.Raycast(cam.transform.position+cam.transform.forward*2,cam.transform.forward,out aimHit,_weaponData.range))
         {
-            bulletImpact.position = hit.point;
-            bulletImpact.rotation = Quaternion.LookRotation(transform.position - bulletImpact.position);
-            Debug.Log(bulletImpact.rotation);
-            HitPoints HP = hit.transform.GetComponent<HitPoints>();
-            if (HP != null)
+            Instantiate(DebugItem, aimHit.point, Quaternion.identity);
+            RaycastHit hit;
+            if (Physics.Raycast(firelocation.position, aimHit.point - firelocation.position, out hit, _weaponData.range))
             {
-                HP.takeDamage(_weaponData.damage);
+                bulletImpact.position = hit.point;
+                bulletImpact.rotation = Quaternion.LookRotation(transform.position - bulletImpact.position);
+                Debug.Log(bulletImpact.rotation);
+                HitPoints HP = hit.transform.GetComponent<HitPoints>();
+                if (HP != null)
+                {
+                    HP.takeDamage(_weaponData.damage);
+                }
+                bulletImpactPS.Play(); // adjust this part to show different particle effect depending on which surface is hit
             }
-            bulletImpactPS.Play(); // adjust this part to show different particle effect depending on which surface is hit
         }
+
+        
     }
 }
