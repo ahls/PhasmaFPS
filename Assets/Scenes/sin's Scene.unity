@@ -1777,7 +1777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1471286792}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1862,6 +1862,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000,
         type: 0}
+    - target: {fileID: 4781233696695892501, guid: a9517a8a0b2603c47987da9c8e34bd44,
+        type: 3}
+      propertyPath: m_Drag
+      value: Infinity
+      objectReference: {fileID: 0}
     - target: {fileID: 5030771241900017711, guid: a9517a8a0b2603c47987da9c8e34bd44,
         type: 3}
       propertyPath: m_RootOrder
