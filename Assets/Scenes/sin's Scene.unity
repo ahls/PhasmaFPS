@@ -555,12 +555,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556341655}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &599183383 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1607063358, guid: a9517a8a0b2603c47987da9c8e34bd44,
-    type: 3}
-  m_PrefabInstance: {fileID: 1922723925}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &627772420
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,12 +1356,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1225264335}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1237834830 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 562727665, guid: a9517a8a0b2603c47987da9c8e34bd44,
-    type: 3}
-  m_PrefabInstance: {fileID: 1922723925}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1370552276
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,12 +1548,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451115065}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1463517264 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 767374742, guid: a9517a8a0b2603c47987da9c8e34bd44,
-    type: 3}
-  m_PrefabInstance: {fileID: 1922723925}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1471286791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1612,18 +1594,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1108654964, guid: a9517a8a0b2603c47987da9c8e34bd44, type: 3}
-      propertyPath: leftHand
-      value: 
-      objectReference: {fileID: 1463517264}
-    - target: {fileID: 1108654964, guid: a9517a8a0b2603c47987da9c8e34bd44, type: 3}
-      propertyPath: aimTarget
-      value: 
-      objectReference: {fileID: 1237834830}
-    - target: {fileID: 1108654964, guid: a9517a8a0b2603c47987da9c8e34bd44, type: 3}
-      propertyPath: rightHand
-      value: 
-      objectReference: {fileID: 599183383}
     - target: {fileID: 5030771241900017711, guid: a9517a8a0b2603c47987da9c8e34bd44,
         type: 3}
       propertyPath: m_RootOrder
@@ -1682,11 +1652,6 @@ PrefabInstance:
     - target: {fileID: 5664177472900682389, guid: a9517a8a0b2603c47987da9c8e34bd44,
         type: 3}
       propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5664177472900682389, guid: a9517a8a0b2603c47987da9c8e34bd44,
-        type: 3}
-      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
