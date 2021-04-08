@@ -7,19 +7,20 @@ public class PlayerWeapons : MonoBehaviour
     public weaponData _weaponData { set; get; }
     private float fireTimer;
     [SerializeField] Camera cam;
-    [SerializeField] Transform bulletImpact;
+    [SerializeField] GameObject ImpactPrefab;
     [SerializeField] Transform leftHand;
     [SerializeField] Transform rightHand;
     [SerializeField] private Rig aimRig;
     [SerializeField] Transform aimTarget;
-    private ParticleSystem bulletImpactPS;
+    private ParticleSystem fireflare;
     private Transform firelocation;
     private float lerpSpeed = 0.1f;
+    private PlayerMovement _playermovement;
 
     // Start is called before the first frame update
     void Start()
     {
-        bulletImpactPS = bulletImpact.GetComponent<ParticleSystem>();
+        _playermovement = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -57,6 +58,7 @@ public class PlayerWeapons : MonoBehaviour
         leftHand.position = newWeapon.leftGrip.position;
         rightHand.position = newWeapon.rightGrip.position;
         firelocation = newWeapon.fireLocation;
+        fireflare = newWeapon.fireLocation.GetComponent<ParticleSystem>();
     }
 
 
@@ -67,19 +69,25 @@ public class PlayerWeapons : MonoBehaviour
         if (Physics.Raycast(cam.transform.position+cam.transform.forward*2,cam.transform.forward,out aimHit,_weaponData.range))
         {
             RaycastHit hit;
-            if (Physics.Raycast(firelocation.position, aimHit.point - firelocation.position, out hit, _weaponData.range))
+            for (int i = 0; i < _weaponData.numPelletes; i++)
             {
-                bulletImpact.position = hit.point;
-                bulletImpact.rotation = Quaternion.LookRotation(transform.position - bulletImpact.position);
-                HitPoints HP = hit.transform.GetComponent<HitPoints>();
-                if (HP != null)
+                Vector3 spreadOffset = new Vector3(Random.Range(-_weaponData.bulletSpread, _weaponData.bulletSpread),
+                                                   Random.Range(-_weaponData.bulletSpread, _weaponData.bulletSpread),
+                                                   Random.Range(-_weaponData.bulletSpread, _weaponData.bulletSpread));
+                if (Physics.Raycast(firelocation.position, aimHit.point - firelocation.position + spreadOffset, out hit, _weaponData.range))
                 {
-                    HP.takeDamage(_weaponData.damage);
+                    GameObject tempImpact = Instantiate(ImpactPrefab, hit.point, Quaternion.LookRotation(transform.position - hit.point));
+                    Destroy(tempImpact, 0.3f);
+                    HitPoints HP = hit.transform.GetComponent<HitPoints>();
+                    if (HP != null)
+                    {
+                        HP.takeDamage(_weaponData.damage);
+                    }
                 }
-                bulletImpactPS.Play(); // adjust this part to show different particle effect depending on which surface is hit
             }
         }
-
+        fireflare.Play();
+        _playermovement.AddRecoil(_weaponData.RecoilX_min, _weaponData.RecoilY_min, _weaponData.RecoilX_max, _weaponData.RecoilY_max);
         
     }
 }

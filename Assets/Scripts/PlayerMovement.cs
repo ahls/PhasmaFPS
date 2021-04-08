@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public float wallDistance = 1f;
     public LayerMask groundMask;
     public CharacterController controller;
+    public Vector2 accumulatedRecoil;
     [SerializeField] private Animator _animator;
 
     float xRotation = 0f;
@@ -40,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
         transform.Rotate(0, mouseX, 0);
         camera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        moveRecoil();
 
         //Character movement
         float forwardMovement = Input.GetAxis("Vertical");
@@ -76,5 +78,21 @@ public class PlayerMovement : MonoBehaviour
         }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+    public void AddRecoil(float minX,float minY,float maxX,float maxY)
+    {
+        accumulatedRecoil.x += Random.Range(minX, maxX);
+        accumulatedRecoil.y += Random.Range(minY, maxY);
+
+    }
+    private void moveRecoil()
+    {
+        float verticalAmount = accumulatedRecoil.y / 2;
+        float horizontalAmount = accumulatedRecoil.x / 2;
+        accumulatedRecoil.y -= verticalAmount;
+        accumulatedRecoil.x -= horizontalAmount;
+        xRotation -= verticalAmount;
+        transform.Rotate(0, horizontalAmount, 0);
+
     }
 }
