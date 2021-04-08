@@ -16,7 +16,6 @@ public class PlayerWeapons : MonoBehaviour
     private Transform firelocation;
     private float lerpSpeed = 0.1f;
 
-    public GameObject DebugItem;
     // Start is called before the first frame update
     void Start()
     {
@@ -65,15 +64,13 @@ public class PlayerWeapons : MonoBehaviour
     {
         fireTimer = 60 / _weaponData.fireRate; // cooldown is (60seconds / RPM)
         RaycastHit aimHit;
-        if(Physics.Raycast(cam.transform.position+cam.transform.forward*2,cam.transform.forward,out aimHit,_weaponData.range))
+        if (Physics.Raycast(cam.transform.position+cam.transform.forward*2,cam.transform.forward,out aimHit,_weaponData.range))
         {
-            Instantiate(DebugItem, aimHit.point, Quaternion.identity);
             RaycastHit hit;
             if (Physics.Raycast(firelocation.position, aimHit.point - firelocation.position, out hit, _weaponData.range))
             {
                 bulletImpact.position = hit.point;
                 bulletImpact.rotation = Quaternion.LookRotation(transform.position - bulletImpact.position);
-                Debug.Log(bulletImpact.rotation);
                 HitPoints HP = hit.transform.GetComponent<HitPoints>();
                 if (HP != null)
                 {
