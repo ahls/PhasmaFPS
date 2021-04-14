@@ -1958,6 +1958,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1589878411142174517, guid: 3f9ac5586027efa4a8e46f51f836b4fa,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1589878411142174517, guid: 3f9ac5586027efa4a8e46f51f836b4fa,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7264036389639187577, guid: 3f9ac5586027efa4a8e46f51f836b4fa,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
