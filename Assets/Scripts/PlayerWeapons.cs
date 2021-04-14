@@ -16,7 +16,10 @@ public class PlayerWeapons : MonoBehaviour
     private Transform firelocation;
     private float lerpSpeed = 0.1f;
     private PlayerMovement _playermovement;
+    
 
+    public Dictionary<int,weaponData> weapons = new Dictionary<int, weaponData>();
+    private int currentWeaponIndex;
     // Start is called before the first frame update
     void Start()
     {
@@ -90,4 +93,35 @@ public class PlayerWeapons : MonoBehaviour
         _playermovement.AddRecoil(_weaponData.RecoilX_min, _weaponData.RecoilY_min, _weaponData.RecoilX_max, _weaponData.RecoilY_max);
         
     }
+
+
+    public void pickupWeapon(weaponData pickedWeapon)
+    {
+        if(weapons.Count <2)
+        {// if there is a empty spot for a new weapon
+            if(!weapons.ContainsKey(0))
+            {//if 0th slot is empty
+                weapons[0] = pickedWeapon;
+                if(weapons.Count == 1)
+                {
+                    updateWeapon(pickedWeapon);
+                    currentWeaponIndex = 0;
+                }
+            }
+            else if(!weapons.ContainsKey(1))
+            {//if 1st slot is empty
+                weapons[1] = pickedWeapon; 
+                if (weapons.Count == 1)
+                {
+                    updateWeapon(pickedWeapon);
+                    currentWeaponIndex = 1;
+                }
+            }
+        }
+        else
+        {
+
+        }
+    }
+
 }
