@@ -40,6 +40,7 @@ public class PlayerWeapons : MonoBehaviour
                 }
             }
         }
+        swap();
         aimDownCheck();
         dropWeaponCheck();
     }
@@ -52,8 +53,12 @@ public class PlayerWeapons : MonoBehaviour
             return;
         }
         currentWeaponIndex = index;
-        
+        if (_weaponData != null)
+        {
+            _weaponData.gameObject.SetActive(false);
+        }
         _weaponData = weapons[index];
+        _weaponData.gameObject.SetActive(true);
         _weaponData.transform.parent = leftHand.parent;
         _weaponData.transform.position = leftHand.parent.position;
         _weaponData.transform.rotation = leftHand.parent.rotation;
@@ -62,7 +67,21 @@ public class PlayerWeapons : MonoBehaviour
         firelocation = _weaponData.fireLocation;
         fireflare = _weaponData.fireLocation.GetComponent<ParticleSystem>();
     }
-
+    private void swap()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            equipWeapon(1);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            equipWeapon(2);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            return;
+        }
+    }
 
     private void fire()
     {
@@ -94,7 +113,7 @@ public class PlayerWeapons : MonoBehaviour
     }
 
 
-    public void pickupWeapon(weaponData pickedWeapon)
+    public bool pickupWeapon(weaponData pickedWeapon)
     {
         if(weapons.Count <2)
         {// if there is a empty spot for a new weapon
@@ -114,7 +133,9 @@ public class PlayerWeapons : MonoBehaviour
                     equipWeapon(2);
                 }
             }
+            return true;
         }
+        return false;
     }
     private void dropWeaponCheck()
     {

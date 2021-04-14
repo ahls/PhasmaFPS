@@ -19,12 +19,14 @@ public class weaponCrate : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("being picked up");
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             GameObject tempWeapon = Instantiate(weaponPrefab);
-           // other.GetComponent<PlayerWeapons>().updateWeapon(tempWeapon.GetComponent<weaponData>());
-            other.GetComponent<PlayerWeapons>().pickupWeapon(tempWeapon.GetComponent<weaponData>());
-            Destroy(gameObject);
+            // other.GetComponent<PlayerWeapons>().updateWeapon(tempWeapon.GetComponent<weaponData>());
+            if (other.GetComponent<PlayerWeapons>().pickupWeapon(tempWeapon.GetComponent<weaponData>()))
+            {//destroy only if the weapon is picked up
+                Destroy(gameObject);
+            }
         }
     }
 }
