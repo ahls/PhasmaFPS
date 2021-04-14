@@ -22,7 +22,8 @@ public class weaponCrate : MonoBehaviour
         if(other.tag == "Player")
         {
             GameObject tempWeapon = Instantiate(weaponPrefab);
-            other.GetComponent<PlayerWeapons>().updateWeapon(tempWeapon.GetComponent<weaponData>());
+           // other.GetComponent<PlayerWeapons>().updateWeapon(tempWeapon.GetComponent<weaponData>());
+            other.GetComponent<PlayerWeapons>().pickupWeapon(tempWeapon.GetComponent<weaponData>());
             Destroy(gameObject);
         }
     }

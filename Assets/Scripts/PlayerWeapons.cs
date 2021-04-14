@@ -40,28 +40,27 @@ public class PlayerWeapons : MonoBehaviour
                 }
             }
         }
-        if(Input.GetMouseButton(1))
-        {
-            aimRig.weight = Mathf.Lerp(aimRig.weight, 1, lerpSpeed);
-        }
-        else
-        {
-            aimRig.weight = Mathf.Lerp(aimRig.weight, 0, lerpSpeed);
-        }
-
+        aimDownCheck();
+        dropWeaponCheck();
     }
 
 
-    public void updateWeapon(weaponData newWeapon)
+    public void equipWeapon(int index)
     {
-        _weaponData = newWeapon;
-        newWeapon.transform.parent = leftHand.parent;
-        newWeapon.transform.position = leftHand.parent.position;
-        newWeapon.transform.rotation = leftHand.parent.rotation;
-        leftHand.position = newWeapon.leftGrip.position;
-        rightHand.position = newWeapon.rightGrip.position;
-        firelocation = newWeapon.fireLocation;
-        fireflare = newWeapon.fireLocation.GetComponent<ParticleSystem>();
+        if(!weapons.ContainsKey(index))
+        {
+            return;
+        }
+        currentWeaponIndex = index;
+        
+        _weaponData = weapons[index];
+        _weaponData.transform.parent = leftHand.parent;
+        _weaponData.transform.position = leftHand.parent.position;
+        _weaponData.transform.rotation = leftHand.parent.rotation;
+        leftHand.position = _weaponData.leftGrip.position;
+        rightHand.position = _weaponData.rightGrip.position;
+        firelocation = _weaponData.fireLocation;
+        fireflare = _weaponData.fireLocation.GetComponent<ParticleSystem>();
     }
 
 
@@ -99,29 +98,75 @@ public class PlayerWeapons : MonoBehaviour
     {
         if(weapons.Count <2)
         {// if there is a empty spot for a new weapon
-            if(!weapons.ContainsKey(0))
+            if(!weapons.ContainsKey(1))
             {//if 0th slot is empty
-                weapons[0] = pickedWeapon;
+                weapons[1] = pickedWeapon;
                 if(weapons.Count == 1)
                 {
-                    updateWeapon(pickedWeapon);
-                    currentWeaponIndex = 0;
+                    equipWeapon(1);
                 }
             }
-            else if(!weapons.ContainsKey(1))
+            else if(!weapons.ContainsKey(2))
             {//if 1st slot is empty
-                weapons[1] = pickedWeapon; 
+                weapons[2] = pickedWeapon; 
                 if (weapons.Count == 1)
                 {
-                    updateWeapon(pickedWeapon);
-                    currentWeaponIndex = 1;
+                    equipWeapon(2);
                 }
             }
         }
-        else
+    }
+    private void dropWeaponCheck()
+    {
+        if(Input.GetKeyDown(KeyCode.B))
         {
-
+            if(currentWeaponIndex ==3)
+            {//you are holding a melee weapon, which cannot be dropped
+                return;
+            }
+            else if(currentWeaponIndex ==1)
+            {
+                if(weapons.ContainsKey(2))
+                {
+                    equipWeapon(2);
+                }
+                else
+                {
+                    equipWeapon(3);
+                }
+                spawnWeapon(weapons[1]);
+                weapons.Remove(1);
+            }
+            else if(currentWeaponIndex == 2)
+            {
+                if (weapons.ContainsKey(1))
+                {
+                    equipWeapon(1);
+                }
+                else
+                {
+                    equipWeapon(3);
+                }
+                spawnWeapon(weapons[2]);
+                weapons.Remove(2);
+            }
         }
     }
 
+    private void spawnWeapon(weaponData droppingWeapon)
+    {
+
+    }
+
+    private void aimDownCheck()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            aimRig.weight = Mathf.Lerp(aimRig.weight, 1, lerpSpeed);
+        }
+        else
+        {
+            aimRig.weight = Mathf.Lerp(aimRig.weight, 0, lerpSpeed);
+        }
+    }
 }
