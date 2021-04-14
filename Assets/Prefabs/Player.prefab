@@ -503,7 +503,7 @@ MonoBehaviour:
         weight: 0
     m_Offset: {x: 4.73, y: 26.61, z: 15.88}
     m_MinLimit: -40
-    m_MaxLimit: 40
+    m_MaxLimit: 10
     m_AimAxis: 4
     m_MaintainOffset: 1
     m_ConstrainedAxes:
@@ -586,7 +586,7 @@ MonoBehaviour:
         weight: 0
     m_Offset: {x: 4.73, y: 26.61, z: 15.88}
     m_MinLimit: -40
-    m_MaxLimit: 40
+    m_MaxLimit: 10
     m_AimAxis: 4
     m_MaintainOffset: 1
     m_ConstrainedAxes:
@@ -2625,7 +2625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 4781233697626790051}
-  ImpactPrefab: {fileID: 0}
+  ImpactPrefab: {fileID: 3438050777471414134}
   leftHand: {fileID: 767374742}
   rightHand: {fileID: 1607063358}
   aimRig: {fileID: 1844020737}
@@ -3874,6 +3874,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37da3d5f9703f0f44a2290ec043c3118, type: 3}
+--- !u!1 &3438050777471414134 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5839104130040790562, guid: 37da3d5f9703f0f44a2290ec043c3118,
+    type: 3}
+  m_PrefabInstance: {fileID: 9132951171016200532}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2664804596206644269 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6504758183877229945, guid: 37da3d5f9703f0f44a2290ec043c3118,
