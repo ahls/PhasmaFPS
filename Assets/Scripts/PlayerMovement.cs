@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
         //animationPart
         _animator.SetFloat("forwardMovement", forwardMovement);
+        _animator.SetBool("onGround", isGrounded);
 
         //Gravity Implementation
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -71,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * gravity * -2);
+            _animator.SetTrigger("jump");
         } 
         else if(velocity.y < speed/2 && forwardMovement > 0 && Input.GetButton("Jump") && !isGrounded && nearWall)
         {
