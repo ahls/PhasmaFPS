@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Animations.Rigging;
 public class PlayerWeapons : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerWeapons : MonoBehaviour
     [SerializeField] Transform rightHand;
     [SerializeField] private Rig aimRig;
     [SerializeField] Transform aimTarget;
+    private AudioSource audioSource;
     private ParticleSystem fireflare;
     private Transform firelocation;
     private float lerpSpeed = 0.1f;
@@ -66,6 +68,9 @@ public class PlayerWeapons : MonoBehaviour
         rightHand.position = _weaponData.rightGrip.position;
         firelocation = _weaponData.fireLocation;
         fireflare = _weaponData.fireLocation.GetComponent<ParticleSystem>();
+
+        audioSource = firelocation.parent.GetComponent<AudioSource>();
+        audioSource.clip = _weaponData.shotSound;
     }
     private void swap()
     {
@@ -108,6 +113,7 @@ public class PlayerWeapons : MonoBehaviour
             }
         }
         fireflare.Play();
+        audioSource.PlayOneShot(audioSource.clip, audioSource.volume);
         _playermovement.AddRecoil(_weaponData.RecoilX_min, _weaponData.RecoilY_min, _weaponData.RecoilX_max, _weaponData.RecoilY_max);
         
     }
