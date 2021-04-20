@@ -4,40 +4,26 @@ using UnityEngine;
 using UnityEngine.Animations.Rigging;
 public class PlayerWeapons : MonoBehaviour
 {
-    [SerializeField] Camera cam;
-    private PlayerMovement _playermovement;
-
-    //shooting
-    [SerializeField] GameObject ImpactPrefab;
-    private ParticleSystem fireflare;
-    private Transform firelocation;
-    private float fireTimer;
-
-    //weapon related
-    public bool slotFull = false;
     public weaponData _weaponData { set; get; }
-    public Dictionary<int,weaponData> weapons = new Dictionary<int, weaponData>();
-    private int currentWeaponIndex = 3;
-    [SerializeField] GameObject KnifePrefab;
-
-
-    //riggings
+    private float fireTimer;
+    [SerializeField] Camera cam;
+    [SerializeField] GameObject ImpactPrefab;
     [SerializeField] Transform leftHand;
     [SerializeField] Transform rightHand;
     [SerializeField] private Rig aimRig;
     [SerializeField] Transform aimTarget;
-    private float lerpSpeed = 0.2f;
+    private ParticleSystem fireflare;
+    private Transform firelocation;
+    private float lerpSpeed = 0.1f;
+    private PlayerMovement _playermovement;
+    
 
-
-
+    public Dictionary<int,weaponData> weapons = new Dictionary<int, weaponData>();
+    private int currentWeaponIndex;
     // Start is called before the first frame update
     void Start()
     {
         _playermovement = GetComponent<PlayerMovement>();
-        GameObject tempKnife = Instantiate(KnifePrefab);
-
-        weapons[3] = tempKnife.GetComponent<weaponData>();
-        equipWeapon(3);
     }
 
     // Update is called once per frame
@@ -83,21 +69,15 @@ public class PlayerWeapons : MonoBehaviour
     }
     private void swap()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (currentWeaponIndex != 1)
-            {
-                equipWeapon(1);
-            }
+            equipWeapon(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (currentWeaponIndex != 2)
-            {
-                equipWeapon(2);
-            }
+            equipWeapon(2);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if(Input.GetKeyDown(KeyCode.Alpha3))
         {
             return;
         }
@@ -140,7 +120,7 @@ public class PlayerWeapons : MonoBehaviour
             if(!weapons.ContainsKey(1))
             {//if 0th slot is empty
                 weapons[1] = pickedWeapon;
-                if(weapons.Count == 2)
+                if(weapons.Count == 1)
                 {
                     equipWeapon(1);
                 }
@@ -148,14 +128,10 @@ public class PlayerWeapons : MonoBehaviour
             else if(!weapons.ContainsKey(2))
             {//if 1st slot is empty
                 weapons[2] = pickedWeapon; 
-                if (weapons.Count == 2)
+                if (weapons.Count == 1)
                 {
                     equipWeapon(2);
                 }
-            }
-            if(weapons.Count == 3)
-            {
-                slotFull = true;
             }
             return true;
         }

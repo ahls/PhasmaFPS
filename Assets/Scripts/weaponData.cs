@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 using UnityEngine;
 
 public class weaponData : MonoBehaviour
@@ -12,6 +13,7 @@ public class weaponData : MonoBehaviour
     public int maxAmmo;
     public int magazineSize;
 
+    public AudioClip shotSound;
     public float RecoilY_min, RecoilY_max;
     public float RecoilX_min, RecoilX_max;
     public int numPelletes;
