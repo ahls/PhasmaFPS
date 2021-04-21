@@ -1,31 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.Audio;
+
 public class PlayerWeapons : MonoBehaviour
 {
-    public weaponData _weaponData { set; get; }
-    private float fireTimer;
     [SerializeField] Camera cam;
+    private PlayerMovement _playermovement;
+
+    //shooting
     [SerializeField] GameObject ImpactPrefab;
+    private ParticleSystem fireflare;
+    private Transform firelocation;
+    private float fireTimer;
+    private AudioSource audioSource;
+
+
+    //weapon related
+    public bool slotFull = false;
+    public weaponData _weaponData { set; get; }
+    public Dictionary<int,weaponData> weapons = new Dictionary<int, weaponData>();
+    private int currentWeaponIndex = 3;
+    [SerializeField] GameObject KnifePrefab;
+
+
+    //riggings
     [SerializeField] Transform leftHand;
     [SerializeField] Transform rightHand;
     [SerializeField] private Rig aimRig;
     [SerializeField] Transform aimTarget;
-    private AudioSource audioSource;
-    private ParticleSystem fireflare;
-    private Transform firelocation;
-    private float lerpSpeed = 0.1f;
-    private PlayerMovement _playermovement;
-    
+    private float lerpSpeed = 0.2f;
 
-    public Dictionary<int,weaponData> weapons = new Dictionary<int, weaponData>();
-    private int currentWeaponIndex;
+
+
     // Start is called before the first frame update
     void Start()
     {
         _playermovement = GetComponent<PlayerMovement>();
+        GameObject tempKnife = Instantiate(KnifePrefab);
+
+        weapons[3] = tempKnife.GetComponent<weaponData>();
+        equipWeapon(3);
     }
 
     // Update is called once per frame
@@ -68,21 +84,26 @@ public class PlayerWeapons : MonoBehaviour
         rightHand.position = _weaponData.rightGrip.position;
         firelocation = _weaponData.fireLocation;
         fireflare = _weaponData.fireLocation.GetComponent<ParticleSystem>();
-
         audioSource = firelocation.parent.GetComponent<AudioSource>();
         audioSource.clip = _weaponData.shotSound;
     }
     private void swap()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            equipWeapon(1);
+            if (currentWeaponIndex != 1)
+            {
+                equipWeapon(1);
+            }
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            equipWeapon(2);
+            if (currentWeaponIndex != 2)
+            {
+                equipWeapon(2);
+            }
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             return;
         }
@@ -113,7 +134,7 @@ public class PlayerWeapons : MonoBehaviour
             }
         }
         fireflare.Play();
-        audioSource.PlayOneShot(audioSource.clip, audioSource.volume);
+        audioSource.PlayOneShot(audioSource.clip,audioSource.volume);
         _playermovement.AddRecoil(_weaponData.RecoilX_min, _weaponData.RecoilY_min, _weaponData.RecoilX_max, _weaponData.RecoilY_max);
         
     }
@@ -126,7 +147,7 @@ public class PlayerWeapons : MonoBehaviour
             if(!weapons.ContainsKey(1))
             {//if 0th slot is empty
                 weapons[1] = pickedWeapon;
-                if(weapons.Count == 1)
+                if(weapons.Count == 2)
                 {
                     equipWeapon(1);
                 }
@@ -134,10 +155,14 @@ public class PlayerWeapons : MonoBehaviour
             else if(!weapons.ContainsKey(2))
             {//if 1st slot is empty
                 weapons[2] = pickedWeapon; 
-                if (weapons.Count == 1)
+                if (weapons.Count == 2)
                 {
                     equipWeapon(2);
                 }
+            }
+            if(weapons.Count == 3)
+            {
+                slotFull = true;
             }
             return true;
         }

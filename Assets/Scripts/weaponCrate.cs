@@ -18,8 +18,8 @@ public class weaponCrate : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("being picked up");
-        if (other.tag == "Player")
+        PlayerWeapons PW= other.GetComponent<PlayerWeapons>();
+        if (PW != null && !PW.slotFull)
         {
             GameObject tempWeapon = Instantiate(weaponPrefab);
             // other.GetComponent<PlayerWeapons>().updateWeapon(tempWeapon.GetComponent<weaponData>());
