@@ -4893,10 +4893,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 400
   range: 80
-  bulletSpread: 0.5
+  bulletSpread: 1
+  reloadTime: 2
   damage: 1
-  maxAmmo: 90
+  maxAmmo: 150
+  currentAmmo: 60
   magazineSize: 30
+  loadedAmmo: 0
   shotSound: {fileID: 8300000, guid: 6f2cc6bc32d30b14f9d323d7fe01f219, type: 3}
   RecoilY_min: 1
   RecoilY_max: 1.5
