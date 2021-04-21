@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed = 100.0f;
     public Transform camera;
     public float jumpHeight = 4f;
-
+    
     public Transform groundCheck;
     public Transform wallCheck;
     public float wallCheckHeight = 1.5f;
@@ -24,6 +24,10 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     bool isGrounded;
     bool nearWall;
+    private float wallClimbingModifier;
+    private bool canWallJump = true;
+    private bool canDoubleJump = true;
+
 
     void Start()
     {
@@ -50,6 +54,13 @@ public class PlayerMovement : MonoBehaviour
         {//Sprint check
             forwardMovement *= 1.5f;
         }
+
+        if(forwardMovement != 0 && strafeMovement != 0)
+        {
+            forwardMovement *= .707f;
+            strafeMovement *= .707f;
+        }
+
         Vector3 move = transform.right * strafeMovement + transform.forward * forwardMovement;
         
         
@@ -67,18 +78,33 @@ public class PlayerMovement : MonoBehaviour
         if(isGrounded && velocity.y < 0)
         {
             velocity.y = -5f;
+            canWallJump = true;
+            canDoubleJump = true;
         }
         
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * gravity * -2);
-            _animator.SetTrigger("jump");
-        } 
-        else if(velocity.y < speed/2 && forwardMovement > 0 && Input.GetButton("Jump") && !isGrounded && nearWall)
-        {
-            velocity.y = speed/2;           //wall climbing section
+            jump(jumpHeight);
         }
-        velocity.y += gravity * Time.deltaTime;
+        else if (canWallJump && velocity.y > 0 && forwardMovement > 0 && !isGrounded && nearWall && Input.GetButtonDown("Jump"))
+        {
+            jump(jumpHeight);
+            canWallJump = false;
+        }
+        else if (canDoubleJump && !isGrounded && Input.GetButtonDown("Jump"))
+        {
+            jump(jumpHeight);
+            canDoubleJump = false;
+        }
+        else if(forwardMovement > 0 && !isGrounded && nearWall)
+        {
+            wallClimbingModifier = 0.5f;           //wall climbing section
+        }
+        else
+        {
+            wallClimbingModifier = 1;
+        }
+        velocity.y += wallClimbingModifier * gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
     public void AddRecoil(float minX,float minY,float maxX,float maxY)
@@ -96,5 +122,10 @@ public class PlayerMovement : MonoBehaviour
         xRotation -= verticalAmount;
         transform.Rotate(0, horizontalAmount, 0);
 
+    }
+    public void jump(float height)
+    {
+        velocity.y = Mathf.Sqrt(height * gravity * -2);
+        _animator.SetTrigger("jump");
     }
 }
