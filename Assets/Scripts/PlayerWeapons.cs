@@ -93,6 +93,7 @@ public class PlayerWeapons : MonoBehaviour
             if (currentWeaponIndex != 1)
             {
                 equipWeapon(1);
+                isReloading = false;
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -100,6 +101,7 @@ public class PlayerWeapons : MonoBehaviour
             if (currentWeaponIndex != 2)
             {
                 equipWeapon(2);
+                isReloading = false;
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
