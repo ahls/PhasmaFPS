@@ -194,6 +194,7 @@ public class PlayerWeapons : MonoBehaviour
             GameObject newCrate = Instantiate(cratePrefab, transform.position, Quaternion.identity);
             droppingWeapon.transform.SetParent(newCrate.transform);
             droppingWeapon.transform.position = newCrate.transform.position;
+            droppingWeapon.transform.localEulerAngles = new Vector3(-90, 0, 0);
             newCrate.GetComponent<weaponCrate>().weaponInside = droppingWeapon.gameObject;
             RaycastHit floor;
             if(Physics.Raycast(newCrate.transform.position, Vector3.down, out floor))

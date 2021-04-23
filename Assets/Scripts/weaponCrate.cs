@@ -28,6 +28,10 @@ public class weaponCrate : MonoBehaviour
             }
         }
     }
+    private void FixedUpdate()
+    {
+        transform.eulerAngles = transform.eulerAngles + Vector3.up;
+    }
     private void OnTriggerEnter(Collider other)
     {
         playerInRange = other.GetComponent<PlayerWeapons>();
