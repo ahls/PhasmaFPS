@@ -16,16 +16,21 @@ public class Explosion : MonoBehaviour
         {
             if (col.tag == "Player")
             {
-                HitPoints tempHP = col.GetComponent<HitPoints>();
-                if (tempHP != null)
+                RaycastHit rcData;
+                Physics.Raycast(this.transform.position, col.transform.position - this.transform.position, out rcData, radius);
+                if (rcData.transform.tag == "Player")
                 {
-                    tempHP.takeDamage(damage);
-                }
+                    HitPoints tempHP = col.GetComponent<HitPoints>();
+                    if (tempHP != null)
+                    {
+                        tempHP.takeDamage(damage);
+                    }
 
-                PlayerMovement player = col.GetComponent<PlayerMovement>();
-                if (player != null)
-                {
-                    player.AddImpact((col.transform.position - this.transform.position).normalized, force);
+                    PlayerMovement player = col.GetComponent<PlayerMovement>();
+                    if (player != null)
+                    {
+                        player.AddImpact((col.transform.position - this.transform.position).normalized, force);
+                    }
                 }
             }
         }
