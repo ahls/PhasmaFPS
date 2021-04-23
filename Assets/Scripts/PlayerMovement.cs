@@ -10,10 +10,15 @@ public class PlayerMovement : MonoBehaviour
     public Transform camera;
     public float jumpHeight = 4f;
     
+    // for adding force to the character controller
+    public float mass = 5f;
+    Vector3 impact = Vector3.zero;
+    // end
+
     public Transform groundCheck;
     public Transform wallCheck;
     public float wallCheckHeight = 1.5f;
-    public float groundDistance = 0.8f;
+    public float groundDistance = 0.4f;
     public float wallDistance = 1f;
     public LayerMask groundMask;
     public CharacterController controller;
@@ -50,23 +55,7 @@ public class PlayerMovement : MonoBehaviour
         //Character movement
         float forwardMovement = Input.GetAxis("Vertical");
         float strafeMovement = Input.GetAxis("Horizontal");
-        if(forwardMovement > 0 && Input.GetKey(KeyCode.LeftShift))
-        {//Sprint check
-            forwardMovement *= 1.5f;
-        }
-
-        if(forwardMovement != 0 && strafeMovement != 0)
-        {
-            forwardMovement *= .707f;
-            strafeMovement *= .707f;
-        }
-
-        Vector3 move = transform.right * strafeMovement + transform.forward * forwardMovement;
         
-        
-        controller.Move(move * speed * Time.deltaTime);
-
-
         //animationPart
         _animator.SetFloat("forwardMovement", forwardMovement);
         _animator.SetBool("onGround", isGrounded);
@@ -78,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
         if(isGrounded && velocity.y < 0)
         {
             velocity.y = -5f;
+            impact = Vector3.zero;
             canWallJump = true;
             canDoubleJump = true;
         }
@@ -90,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
         {
             jump(jumpHeight);
             canWallJump = false;
+            AddImpact(transform.forward, -100);
         }
         else if (canDoubleJump && !isGrounded && Input.GetButtonDown("Jump"))
         {
@@ -98,21 +89,48 @@ public class PlayerMovement : MonoBehaviour
         }
         else if(forwardMovement > 0 && !isGrounded && nearWall)
         {
-            wallClimbingModifier = 0.5f;           //wall climbing section
+            wallClimbingModifier = 0.5f;           //Allows the player to jump higher when next to a wall, kind of like running up the wall.
         }
         else
         {
-            wallClimbingModifier = 1;
+            wallClimbingModifier = 1;               // Resets the players acceleration, so that they react to gravity normally when not climbing the wall. 
         }
+
+        if (forwardMovement > 0 && Input.GetKey(KeyCode.LeftShift))
+        {//Sprint check
+            forwardMovement *= 1.5f;
+        }
+
+        if (forwardMovement != 0 && strafeMovement != 0)
+        {
+            forwardMovement *= .707f;
+            strafeMovement *= .707f;
+        }
+
+        Vector3 move = transform.right * strafeMovement + transform.forward * forwardMovement;
+
+        controller.Move(move * speed * Time.deltaTime);
+
         velocity.y += wallClimbingModifier * gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        //If the character has force acting on them.
+        if (impact.magnitude > 0.2f)
+        {
+            controller.Move(impact * Time.deltaTime);
+        }
+        impact = Vector3.Lerp(impact, Vector3.zero, Time.deltaTime);
     }
+
+
     public void AddRecoil(float minX,float minY,float maxX,float maxY)
     {
         accumulatedRecoil.x += Random.Range(minX, maxX);
         accumulatedRecoil.y += Random.Range(minY, maxY);
 
     }
+    
+    
     private void moveRecoil()
     {
         float verticalAmount = accumulatedRecoil.y / 2;
@@ -123,9 +141,22 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(0, horizontalAmount, 0);
 
     }
+    
+    
     public void jump(float height)
     {
         velocity.y = Mathf.Sqrt(height * gravity * -2);
         _animator.SetTrigger("jump");
+    }
+    
+    
+    public void AddImpact(Vector3 dir, float force)
+    {
+        dir.Normalize();
+        if (dir.y < 0)
+        {
+            dir.y = -dir.y;
+        }
+        impact += dir.normalized * force / mass;
     }
 }
