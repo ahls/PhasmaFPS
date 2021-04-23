@@ -7,6 +7,7 @@ public class HitPoints : MonoBehaviour
     [SerializeField] private float maxHP;
     public float currentHP { set; get; }
     public ParticleSystem ps;
+    
     // Start is called before the first frame update
     void Start()
     {

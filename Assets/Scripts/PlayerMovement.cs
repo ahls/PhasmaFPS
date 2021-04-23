@@ -67,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
         if(isGrounded && velocity.y < 0)
         {
             velocity.y = -5f;
-            impact = Vector3.zero;
             canWallJump = true;
             canDoubleJump = true;
         }
@@ -78,9 +77,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (canWallJump && velocity.y > 0 && forwardMovement > 0 && !isGrounded && nearWall && Input.GetButtonDown("Jump"))
         {
-            jump(jumpHeight);
+            wallJump(jumpHeight, -100f);
             canWallJump = false;
-            AddImpact(transform.forward, -100);
         }
         else if (canDoubleJump && !isGrounded && Input.GetButtonDown("Jump"))
         {
@@ -115,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
         //If the character has force acting on them.
-        if (impact.magnitude > 0.2f)
+        if (impact.magnitude > 5f)
         {
             controller.Move(impact * Time.deltaTime);
         }
@@ -148,7 +146,12 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = Mathf.Sqrt(height * gravity * -2);
         _animator.SetTrigger("jump");
     }
-    
+
+    public void wallJump(float height, float force)
+    {
+        jump(height);
+        AddImpact(transform.forward, force);
+    }
     
     public void AddImpact(Vector3 dir, float force)
     {
