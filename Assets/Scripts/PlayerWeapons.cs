@@ -19,13 +19,12 @@ public class PlayerWeapons : MonoBehaviour
 
 
     //weapon related
-    public bool slotFull = false;
-    public weaponData _weaponData { set; get; }
+    [HideInInspector] public weaponData _weaponData { set; get; }
     public Dictionary<int,weaponData> weapons = new Dictionary<int, weaponData>();
     private int currentWeaponIndex = 3;
     private float reloadingTimer;
     private bool isReloading = false;
-    [SerializeField] GameObject KnifePrefab;
+    [SerializeField] GameObject DefaultWeapon;
     [SerializeField] Text loadedAmmo, totalAmmo;
 
     //riggings
@@ -41,7 +40,7 @@ public class PlayerWeapons : MonoBehaviour
     void Start()
     {
         _playermovement = GetComponent<PlayerMovement>();
-        GameObject tempKnife = Instantiate(KnifePrefab);
+        GameObject tempKnife = Instantiate(DefaultWeapon);
 
         weapons[3] = tempKnife.GetComponent<weaponData>();
         equipWeapon(3);
@@ -79,7 +78,9 @@ public class PlayerWeapons : MonoBehaviour
         _weaponData.transform.position = leftHand.parent.position;
         _weaponData.transform.rotation = leftHand.parent.rotation;
         leftHand.position = _weaponData.leftGrip.position;
+        leftHand.rotation = _weaponData.leftGrip.rotation;
         rightHand.position = _weaponData.rightGrip.position;
+        rightHand.rotation = _weaponData.rightGrip.rotation;
         firelocation = _weaponData.fireLocation;
         fireflare = _weaponData.fireLocation.GetComponent<ParticleSystem>();
         audioSource = firelocation.parent.GetComponent<AudioSource>();
@@ -106,33 +107,31 @@ public class PlayerWeapons : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            return;
+            if (currentWeaponIndex != 3)
+            {
+                equipWeapon(3);
+                isReloading = false;
+            }
         }
     }
 
     public bool pickupWeapon(weaponData pickedWeapon)
     {
-        if (weapons.Count < 2)
+        if (weapons.Count < 3)
         {// if there is a empty spot for a new weapon
             if (!weapons.ContainsKey(1))
             {//if 0th slot is empty
                 weapons[1] = pickedWeapon;
-                if (weapons.Count == 2)
-                {
-                    equipWeapon(1);
-                }
+
+                equipWeapon(1);
+                
             }
             else if (!weapons.ContainsKey(2))
             {//if 1st slot is empty
                 weapons[2] = pickedWeapon;
-                if (weapons.Count == 2)
-                {
-                    equipWeapon(2);
-                }
-            }
-            if (weapons.Count == 3)
-            {
-                slotFull = true;
+
+                equipWeapon(2);
+                
             }
             return true;
         }
@@ -286,7 +285,7 @@ public class PlayerWeapons : MonoBehaviour
     #endregion
 
     private void updateAmmoInfo()
-    {
+    {  
         loadedAmmo.text = _weaponData.loadedAmmo.ToString();
         totalAmmo.text = _weaponData.currentAmmo.ToString();
     }

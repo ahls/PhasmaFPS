@@ -19,7 +19,7 @@ public class weaponCrate : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PlayerWeapons PW= other.GetComponent<PlayerWeapons>();
-        if (PW != null && !PW.slotFull)
+        if (PW != null && PW.weapons.Count < 3)
         {
             GameObject tempWeapon = Instantiate(weaponPrefab);
             // other.GetComponent<PlayerWeapons>().updateWeapon(tempWeapon.GetComponent<weaponData>());
