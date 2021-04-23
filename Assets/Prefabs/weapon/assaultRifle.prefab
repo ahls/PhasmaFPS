@@ -4868,8 +4868,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5556438974186745725}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.3389805, y: 0.100342765, z: -0.046839494, w: 0.9342535}
+  m_LocalPosition: {x: -0.76996076, y: 6.5318356, z: 20.764576}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5374719272373505348}
@@ -4899,7 +4899,7 @@ MonoBehaviour:
   maxAmmo: 150
   currentAmmo: 60
   magazineSize: 30
-  loadedAmmo: 0
+  loadedAmmo: 30
   shotSound: {fileID: 8300000, guid: 6f2cc6bc32d30b14f9d323d7fe01f219, type: 3}
   RecoilY_min: 1
   RecoilY_max: 1.5
@@ -4919,7 +4919,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6f2cc6bc32d30b14f9d323d7fe01f219, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

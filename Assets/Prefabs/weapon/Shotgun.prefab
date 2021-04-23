@@ -85,8 +85,8 @@ MonoBehaviour:
   damage: 3
   maxAmmo: 100
   currentAmmo: 30
-  magazineSize: 8
-  loadedAmmo: 0
+  magazineSize: 5
+  loadedAmmo: 5
   shotSound: {fileID: 8300000, guid: 8f73ebe783aa2614faf5f1d8cc5989c7, type: 3}
   RecoilY_min: 6
   RecoilY_max: 6

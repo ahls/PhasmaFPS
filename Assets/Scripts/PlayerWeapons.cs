@@ -26,6 +26,7 @@ public class PlayerWeapons : MonoBehaviour
     private bool isReloading = false;
     [SerializeField] GameObject DefaultWeapon;
     [SerializeField] Text loadedAmmo, totalAmmo;
+    [SerializeField] GameObject cratePrefab;
 
     //riggings
     [SerializeField] Transform leftHand;
@@ -146,11 +147,14 @@ public class PlayerWeapons : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.B))
         {
             if (currentWeaponIndex == 3)
-            {//you are holding a melee weapon, which cannot be dropped
+            {//you are holding a default weapon, which cannot be dropped
                 return;
             }
-            else if (currentWeaponIndex == 1)
+            _weaponData = null;
+            if (currentWeaponIndex == 1)
             {
+                spawnWeapon(weapons[1]);
+                weapons.Remove(1);
                 if (weapons.ContainsKey(2))
                 {
                     equipWeapon(2);
@@ -159,11 +163,11 @@ public class PlayerWeapons : MonoBehaviour
                 {
                     equipWeapon(3);
                 }
-                spawnWeapon(weapons[1]);
-                weapons.Remove(1);
             }
             else if (currentWeaponIndex == 2)
             {
+                spawnWeapon(weapons[2]);
+                weapons.Remove(2);
                 if (weapons.ContainsKey(1))
                 {
                     equipWeapon(1);
@@ -172,8 +176,6 @@ public class PlayerWeapons : MonoBehaviour
                 {
                     equipWeapon(3);
                 }
-                spawnWeapon(weapons[2]);
-                weapons.Remove(2);
             }
         }
     }
@@ -183,7 +185,23 @@ public class PlayerWeapons : MonoBehaviour
     /// <param name="droppingWeapon"></param>
     private void spawnWeapon(weaponData droppingWeapon)
     {
-
+        if(droppingWeapon.loadedAmmo == 0 && droppingWeapon.currentAmmo == 0)
+        {
+            Destroy(droppingWeapon.gameObject);
+        }
+        else
+        {
+            GameObject newCrate = Instantiate(cratePrefab, transform.position, Quaternion.identity);
+            droppingWeapon.transform.SetParent(newCrate.transform);
+            droppingWeapon.transform.position = newCrate.transform.position;
+            newCrate.GetComponent<weaponCrate>().weaponInside = droppingWeapon.gameObject;
+            RaycastHit floor;
+            if(Physics.Raycast(newCrate.transform.position, Vector3.down, out floor))
+            {
+                newCrate.transform.position = floor.point + Vector3.up;
+            }
+            
+        }
     }
 
     #endregion

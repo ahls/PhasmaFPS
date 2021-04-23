@@ -463,7 +463,7 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 4.73, y: 26.61, z: 15.88}
-    m_MinLimit: -40
+    m_MinLimit: -80
     m_MaxLimit: 10
     m_AimAxis: 4
     m_MaintainOffset: 1
@@ -546,7 +546,7 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 4.73, y: 26.61, z: 15.88}
-    m_MinLimit: -40
+    m_MinLimit: -80
     m_MaxLimit: 10
     m_AimAxis: 4
     m_MaintainOffset: 1
@@ -2593,6 +2593,8 @@ MonoBehaviour:
     type: 3}
   loadedAmmo: {fileID: 0}
   totalAmmo: {fileID: 0}
+  cratePrefab: {fileID: 2537884384539045301, guid: 0c98f0cdcadb3cf41aded555bcf28f10,
+    type: 3}
   leftHand: {fileID: 767374742}
   rightHand: {fileID: 1607063358}
   aimRig: {fileID: 1844020737}

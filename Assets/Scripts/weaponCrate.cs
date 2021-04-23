@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class weaponCrate : MonoBehaviour
 {
-    public GameObject weaponPrefab;
+    public GameObject weaponInside;
+    public bool withinRange = false;
+    public PlayerWeapons playerInRange;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,19 +16,25 @@ public class weaponCrate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (playerInRange != null && playerInRange.weapons.Count < 3)
+            {
+                // other.GetComponent<PlayerWeapons>().updateWeapon(tempWeapon.GetComponent<weaponData>());
+                if (playerInRange.pickupWeapon(weaponInside.GetComponent<weaponData>()))
+                {//destroy only if the weapon is picked up
+                    Destroy(gameObject);
+                }
+            }
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
-        PlayerWeapons PW= other.GetComponent<PlayerWeapons>();
-        if (PW != null && PW.weapons.Count < 3)
-        {
-            GameObject tempWeapon = Instantiate(weaponPrefab);
-            // other.GetComponent<PlayerWeapons>().updateWeapon(tempWeapon.GetComponent<weaponData>());
-            if (other.GetComponent<PlayerWeapons>().pickupWeapon(tempWeapon.GetComponent<weaponData>()))
-            {//destroy only if the weapon is picked up
-                Destroy(gameObject);
-            }
-        }
+        playerInRange = other.GetComponent<PlayerWeapons>();
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (playerInRange == other.GetComponent<PlayerWeapons>())
+            playerInRange = null;
     }
 }
