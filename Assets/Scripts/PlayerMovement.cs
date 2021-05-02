@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -32,15 +33,20 @@ public class PlayerMovement : MonoBehaviour
     private float wallClimbingModifier;
     private bool canWallJump = true;
     private bool canDoubleJump = true;
+    private PhotonView _pv;
+
 
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        _pv = GetComponent<PhotonView>();
     }
 
     void Update()
     {
+        if (!_pv.IsMine && PhotonNetwork.IsConnected)       return;
+        
         // Character looking
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * rotationSpeed;
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * rotationSpeed;
