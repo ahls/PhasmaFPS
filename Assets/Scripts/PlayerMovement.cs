@@ -10,8 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed = 100.0f;
     public Transform camera;
     public float jumpHeight = 4f;
-    public float fallDamageMultiplier = 0.1f;
-    public float fallDamageVelocityThreshold = 5f;
+    public float fallDamageMultiplier = 1f;
+    public float fallDamageVelocityThreshold = 35f;
     
     // for adding force to the character controller
     public float mass = 5f;
@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     float xRotation = 0f;
     Vector3 velocity;
+    public Vector3 prevVelocity = Vector3.zero;
     bool isGrounded;
     bool wasGrounded;
     bool nearWall;
@@ -81,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
             canDoubleJump = true;
         }
         
-        if(isGrounded && !wasGrounded && velocity.y < -fallDamageVelocityThreshold)
+        if(isGrounded && !wasGrounded && prevVelocity.y < -fallDamageVelocityThreshold)
         {
             takeFallDamage();
         }
@@ -134,6 +135,7 @@ public class PlayerMovement : MonoBehaviour
         }
         impact = Vector3.Lerp(impact, Vector3.zero, Time.deltaTime);
         wasGrounded = isGrounded;
+        prevVelocity = velocity;
     }
 
 
@@ -155,11 +157,19 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(0, horizontalAmount, 0);
 
     }
-    
-    
+
+
     public void jump(float height)
     {
-        velocity.y = Mathf.Sqrt(height * gravity * -2);
+        float theJump = Mathf.Sqrt(height * gravity * -2);
+        if (velocity.y > 0)
+        {
+            velocity.y += theJump;
+        }
+        else
+        {
+            velocity.y = theJump;
+        }
         _animator.SetTrigger("jump");
     }
 
@@ -183,7 +193,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if(hp != null)
         {
-            float amount = -velocity.y * fallDamageMultiplier;
+            float amount = fallDamageMultiplier * (-prevVelocity.y / 2);
+            Debug.Log("Player took damage: " + amount);
             hp.takeDamage(amount);
         }
     }
