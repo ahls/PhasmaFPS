@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using Photon.Pun;
 public class HitPoints : MonoBehaviour
 {
     [SerializeField] private float maxHP;
     public float currentHP { set; get; }
     public ParticleSystem ps;
+    [SerializeField] private bool isPlayer;
+    [SerializeField] private Text _healthDisplay;
+    private PhotonView _pv;
     
     // Start is called before the first frame update
     void Start()
@@ -24,6 +28,7 @@ public class HitPoints : MonoBehaviour
     public void init()
     {
         currentHP = maxHP;
+        _pv = GetComponent<PhotonView>();
     }
     public void init(float newHealth)
     {
@@ -37,6 +42,10 @@ public class HitPoints : MonoBehaviour
     public void takeDamage(float dmg)
     {
         currentHP -= dmg;
+        if(isPlayer && _pv.IsMine)
+        {
+            _healthDisplay.text = currentHP.ToString();
+        }
 
         if(currentHP <= 0)
         {

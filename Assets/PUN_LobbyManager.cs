@@ -14,10 +14,7 @@ public class PUN_LobbyManager : MonoBehaviour
         _pv = GetComponent<PhotonView>();
         GameObject newPanel =  PhotonNetwork.Instantiate(Path.Combine("Prefabs","Networking",_playerPanelPrefab.name),Vector3.zero,Quaternion.identity,0);
         _pv.RPC("AddToPanel", RpcTarget.MasterClient, newPanel);
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            _playersPanel.gameObject.SetActive(false);
-        }
+        
     }
 
     [PunRPC]
