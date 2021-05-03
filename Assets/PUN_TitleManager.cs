@@ -10,7 +10,9 @@ public class PUN_TitleManager :  MonoBehaviourPunCallbacks
 {
     private string _gameVersion = "0.01";
     [SerializeField] private InputField _createIF;
+    [SerializeField] private InputField _createPN;
     [SerializeField] private InputField _joinIF;
+    [SerializeField] private InputField _joinPN;
     [SerializeField] private GameObject _errorPopup;
     [SerializeField] private Text _errorTxt;
     // Start is called before the first frame update
@@ -54,10 +56,12 @@ public class PUN_TitleManager :  MonoBehaviourPunCallbacks
     public void OnCreateButton()
     {
         PhotonNetwork.CreateRoom(_createIF.text, new RoomOptions { MaxPlayers = 2 });
+        PhotonNetwork.NickName = _createPN.text;
     }
     public void OnJoinButton()
     {
         PhotonNetwork.JoinRoom(_joinIF.text);
+        PhotonNetwork.NickName = _joinPN.text;
     }
     public void OnExitButton()
     {
