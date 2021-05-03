@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed = 100.0f;
     public Transform camera;
     public float jumpHeight = 4f;
+    public float fallDamageMultiplier = 0.1f;
+    public float fallDamageVelocityThreshold = 5f;
     
     // for adding force to the character controller
     public float mass = 5f;
@@ -29,18 +31,20 @@ public class PlayerMovement : MonoBehaviour
     float xRotation = 0f;
     Vector3 velocity;
     bool isGrounded;
+    bool wasGrounded;
     bool nearWall;
     private float wallClimbingModifier;
     private bool canWallJump = true;
     private bool canDoubleJump = true;
     private PhotonView _pv;
-
+    private HitPoints hp;
 
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         _pv = GetComponent<PhotonView>();
+        hp = GetComponent<HitPoints>();
     }
 
     void Update()
@@ -75,6 +79,11 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -5f;
             canWallJump = true;
             canDoubleJump = true;
+        }
+        
+        if(isGrounded && !wasGrounded && velocity.y < -fallDamageVelocityThreshold)
+        {
+            takeFallDamage();
         }
         
         if(Input.GetButtonDown("Jump") && isGrounded)
@@ -124,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
             controller.Move(impact * Time.deltaTime);
         }
         impact = Vector3.Lerp(impact, Vector3.zero, Time.deltaTime);
+        wasGrounded = isGrounded;
     }
 
 
@@ -167,5 +177,14 @@ public class PlayerMovement : MonoBehaviour
             dir.y = -dir.y;
         }
         impact += dir.normalized * force / mass;
+    }
+
+    public void takeFallDamage()
+    {
+        if(hp != null)
+        {
+            float amount = -velocity.y * fallDamageMultiplier;
+            hp.takeDamage(amount);
+        }
     }
 }
