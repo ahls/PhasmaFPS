@@ -34,7 +34,7 @@ public class PlayerPanelBehaviour : MonoBehaviour
         {
             PhotonNetwork.LoadLevel("Arena");
         }
-
-
     }
+
+
 }

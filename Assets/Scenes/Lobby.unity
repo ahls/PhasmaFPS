@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 930744604}
   - component: {fileID: 930744603}
   - component: {fileID: 930744605}
+  - component: {fileID: 930744606}
   m_Layer: 5
   m_Name: Players panel
   m_TagString: Untagged
@@ -395,6 +396,28 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &930744606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930744601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &933306815
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,6 +430,7 @@ GameObject:
   - component: {fileID: 933306817}
   - component: {fileID: 933306816}
   - component: {fileID: 933306819}
+  - component: {fileID: 933306820}
   m_Layer: 0
   m_Name: Lobby Manager
   m_TagString: Untagged
@@ -477,6 +501,28 @@ MonoBehaviour:
   _playerPanelPrefab: {fileID: 963629456137183293, guid: 4b52cd1d7505b96429ce6fee69589b00,
     type: 3}
   _playersPanel: {fileID: 930744602}
+--- !u!114 &933306820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933306815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1869716308
 GameObject:
   m_ObjectHideFlags: 0
