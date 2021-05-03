@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (!_pv.IsMine && PhotonNetwork.IsConnected)       return;
+        if (PhotonNetwork.IsConnected && !_pv.IsMine)       return;
         
         // Character looking
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * rotationSpeed;
