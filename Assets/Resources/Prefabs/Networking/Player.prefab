@@ -2405,8 +2405,8 @@ MonoBehaviour:
   rotationSpeed: 140
   camera: {fileID: 5953690449845834413}
   jumpHeight: 4
-  fallDamageMultiplier: 0.1
-  fallDamageVelocityThreshold: 5
+  fallDamageMultiplier: 1.1
+  fallDamageVelocityThreshold: 35
   mass: 5
   groundCheck: {fileID: 1188188152}
   wallCheck: {fileID: 1790659805}
