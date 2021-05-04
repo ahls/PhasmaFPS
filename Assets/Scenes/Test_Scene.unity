@@ -4490,7 +4490,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 749825640}
     - target: {fileID: 1108654964, guid: a9517a8a0b2603c47987da9c8e34bd44, type: 3}
+      propertyPath: _totalAmmo
+      value: 
+      objectReference: {fileID: 749825640}
+    - target: {fileID: 1108654964, guid: a9517a8a0b2603c47987da9c8e34bd44, type: 3}
       propertyPath: loadedAmmo
+      value: 
+      objectReference: {fileID: 607168127}
+    - target: {fileID: 1108654964, guid: a9517a8a0b2603c47987da9c8e34bd44, type: 3}
+      propertyPath: _loadedAmmo
       value: 
       objectReference: {fileID: 607168127}
     - target: {fileID: 1279226182888553706, guid: a9517a8a0b2603c47987da9c8e34bd44,
