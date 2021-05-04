@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lobby.unity
     guid: 24637e71e5110be46a6e5c80e0f90ae0
+  - enabled: 1
+    path: Assets/Scenes/TempArena.unity
+    guid: 04211e3ee87cbda47b12f6337d93dd07
   m_configObjects: {}

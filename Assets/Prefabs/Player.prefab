@@ -2318,6 +2318,8 @@ GameObject:
   - component: {fileID: 1183917407}
   - component: {fileID: 1108654964}
   - component: {fileID: 955199614}
+  - component: {fileID: 8824063147135747833}
+  - component: {fileID: 1279226182888553706}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -2417,6 +2419,7 @@ MonoBehaviour:
   controller: {fileID: 6023334550030878795}
   accumulatedRecoil: {x: 0, y: 0}
   _animator: {fileID: 4781233696695892498}
+  prevVelocity: {x: 0, y: 0, z: 0}
 --- !u!143 &6023334550030878795
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2615,6 +2618,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   ps: {fileID: 0}
+  isPlayer: 0
+  _healthDisplay: {fileID: 0}
+--- !u!114 &8824063147135747833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5664177472900682389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
+--- !u!114 &1279226182888553706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5664177472900682389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 8824063147135747833}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &5822921156515960873
 GameObject:
   m_ObjectHideFlags: 0
