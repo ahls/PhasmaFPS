@@ -11,7 +11,7 @@ public class HitPoints : MonoBehaviour
     [SerializeField] private bool isPlayer;
     [SerializeField] private Text _healthDisplay;
     private PhotonView _pv;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +21,7 @@ public class HitPoints : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     #region setups
@@ -37,17 +37,20 @@ public class HitPoints : MonoBehaviour
     }
     #endregion
 
-
-
-    public void takeDamage(float dmg)
+    public void takeDamageCaller(float dmg)
+    {
+        _pv.RPC("takeDamage", RpcTarget.AllBuffered, dmg);
+    }
+    [PunRPC]
+    private void takeDamage(float dmg)
     {
         currentHP -= dmg;
-        if(isPlayer && _pv.IsMine)
+        if (isPlayer && _pv.IsMine)
         {
-            _healthDisplay.text = currentHP.ToString();
+            _healthDisplay.text = ((int)currentHP).ToString();
         }
 
-        if(currentHP <= 0)
+        if (currentHP <= 0)
         {
             onDeath();
         }

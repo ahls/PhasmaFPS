@@ -195,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
         {
             float amount = fallDamageMultiplier * (-prevVelocity.y / 2);
             Debug.Log("Player took damage: " + amount);
-            hp.takeDamage(amount);
+            hp.takeDamageCaller(amount);
         }
     }
 }

@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-
+using Photon.Pun;
 public class PlayerWeapons : MonoBehaviour
 {
     [SerializeField] Camera cam;
     private PlayerMovement _playermovement;
+    private PhotonView _pv;
 
     //shooting
     [SerializeField] GameObject ImpactPrefab;
@@ -41,6 +42,7 @@ public class PlayerWeapons : MonoBehaviour
     void Start()
     {
         _playermovement = GetComponent<PlayerMovement>();
+        _pv = GetComponent<PhotonView>();
         GameObject tempKnife = Instantiate(DefaultWeapon);
 
         weapons[3] = tempKnife.GetComponent<weaponData>();
@@ -50,6 +52,7 @@ public class PlayerWeapons : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!_pv.IsMine) return;
         fireTimer -= Time.deltaTime;
         if (_weaponData != null)
         {
@@ -250,7 +253,7 @@ public class PlayerWeapons : MonoBehaviour
                     HitPoints HP = hit.transform.GetComponent<HitPoints>();
                     if (HP != null)
                     {
-                        HP.takeDamage(_weaponData.damage);
+                        HP.takeDamageCaller(_weaponData.damage);
                     }
                 }
             }

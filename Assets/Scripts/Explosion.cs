@@ -23,7 +23,7 @@ public class Explosion : MonoBehaviour
                     HitPoints tempHP = col.GetComponent<HitPoints>();
                     if (tempHP != null)
                     {
-                        tempHP.takeDamage(damage);
+                        tempHP.takeDamageCaller(damage);
                     }
 
                     PlayerMovement player = col.GetComponent<PlayerMovement>();
