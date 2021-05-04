@@ -37,7 +37,7 @@ public class PlayerPanelBehaviour : MonoBehaviour
         if (PhotonNetwork.IsMasterClient && _numReadyPlayers == 2)
         {
             Debug.Log("Arena is being loaded");
-            PhotonNetwork.LoadLevel("Arena");
+            PhotonNetwork.LoadLevel("TempArena");
         }
     }
 

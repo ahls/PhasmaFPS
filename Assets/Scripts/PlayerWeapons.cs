@@ -47,6 +47,10 @@ public class PlayerWeapons : MonoBehaviour
 
         weapons[3] = tempKnife.GetComponent<weaponData>();
         equipWeapon(3);
+        if(_pv.IsMine)
+        {
+            cam.gameObject.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -311,12 +315,14 @@ public class PlayerWeapons : MonoBehaviour
         _loadedAmmo.text = _weaponData.loadedAmmo.ToString();
         _totalAmmo.text = _weaponData.currentAmmo.ToString();
     }
-    private void init(Text currentAmmo,Text totalAmmo,Text hpDIsplay)
+    public void init(GameObject canvas)
     {
-        _loadedAmmo = currentAmmo;
-        _totalAmmo = totalAmmo;
+        CanvasConnector cc = canvas.GetComponent<CanvasConnector>();
+
+        _loadedAmmo = cc.CurrentAmmo;
+        _totalAmmo = cc.TotalAmmo;
         GetComponent<HitPoints>().isPlayer = true;
-        GetComponent<HitPoints>()._healthDisplay = hpDIsplay;
+        GetComponent<HitPoints>()._healthDisplay = cc.Health;
 
     }
 }

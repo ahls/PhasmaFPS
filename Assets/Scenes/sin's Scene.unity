@@ -2718,6 +2718,11 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4781233697626790049, guid: a9517a8a0b2603c47987da9c8e34bd44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5030771241900017711, guid: a9517a8a0b2603c47987da9c8e34bd44,
         type: 3}
       propertyPath: m_RootOrder
@@ -3077,24 +3082,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29228ee59bcba984db4424b93cd41a93, type: 3}
---- !u!1 &2085067459512241332 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2085067460859722599, guid: 29228ee59bcba984db4424b93cd41a93,
-    type: 3}
-  m_PrefabInstance: {fileID: 2085067459512241331}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2085067459512241333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085067459512241332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75855342af0cedf468f2be00b427e6c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentAmmo: {fileID: 296505931}
-  TotalAmmo: {fileID: 529110867}
-  Health: {fileID: 285201075}
