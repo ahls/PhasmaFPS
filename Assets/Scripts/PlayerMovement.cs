@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         _pv = GetComponent<PhotonView>();
         hp = GetComponent<HitPoints>();
     }
