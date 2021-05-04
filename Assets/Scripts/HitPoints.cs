@@ -8,8 +8,8 @@ public class HitPoints : MonoBehaviour
     [SerializeField] private float maxHP;
     public float currentHP { set; get; }
     public ParticleSystem ps;
-    [SerializeField] private bool isPlayer;
-    [SerializeField] private Text _healthDisplay;
+    public bool isPlayer { get; set; } = false;
+    public Text _healthDisplay;
     private PhotonView _pv;
 
     // Start is called before the first frame update

@@ -26,7 +26,7 @@ public class PlayerWeapons : MonoBehaviour
     private float reloadingTimer;
     private bool isReloading = false;
     [SerializeField] GameObject DefaultWeapon;
-    [SerializeField] Text loadedAmmo, totalAmmo;
+    [SerializeField] Text _loadedAmmo, _totalAmmo;
     [SerializeField] GameObject cratePrefab;
 
     //riggings
@@ -259,7 +259,7 @@ public class PlayerWeapons : MonoBehaviour
             }
         }
         _weaponData.loadedAmmo--;
-        loadedAmmo.text = _weaponData.loadedAmmo.ToString();
+        _loadedAmmo.text = _weaponData.loadedAmmo.ToString();
         fireflare.Play();
         audioSource.PlayOneShot(audioSource.clip,audioSource.volume);
         _playermovement.AddRecoil(_weaponData.RecoilX_min, _weaponData.RecoilY_min, _weaponData.RecoilX_max, _weaponData.RecoilY_max);
@@ -308,8 +308,15 @@ public class PlayerWeapons : MonoBehaviour
 
     private void updateAmmoInfo()
     {  
-        loadedAmmo.text = _weaponData.loadedAmmo.ToString();
-        totalAmmo.text = _weaponData.currentAmmo.ToString();
+        _loadedAmmo.text = _weaponData.loadedAmmo.ToString();
+        _totalAmmo.text = _weaponData.currentAmmo.ToString();
     }
+    private void init(Text currentAmmo,Text totalAmmo,Text hpDIsplay)
+    {
+        _loadedAmmo = currentAmmo;
+        _totalAmmo = totalAmmo;
+        GetComponent<HitPoints>().isPlayer = true;
+        GetComponent<HitPoints>()._healthDisplay = hpDIsplay;
 
+    }
 }
