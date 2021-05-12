@@ -18,6 +18,7 @@ public class weaponCrate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!_pv.IsMine) return;
         if (Input.GetKeyDown(KeyCode.F))
         {
             if (playerInRange != null && playerInRange.weapons.Count < 3)
