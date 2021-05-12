@@ -81,6 +81,13 @@ public class PlayerWeapons : MonoBehaviour
             _weaponData.gameObject.SetActive(false);
         }
         _weaponData = weapons[index];
+        _pv.RPC("HoldWeapon", RpcTarget.AllBuffered);
+        //HoldWeapon();
+        updateAmmoInfo();
+    }
+    [PunRPC]
+    private void HoldWeapon()
+    {
         _weaponData.gameObject.SetActive(true);
         _weaponData.transform.parent = leftHand.parent;
         _weaponData.transform.position = leftHand.parent.position;
@@ -93,7 +100,6 @@ public class PlayerWeapons : MonoBehaviour
         fireflare = _weaponData.fireLocation.GetComponent<ParticleSystem>();
         audioSource = firelocation.parent.GetComponent<AudioSource>();
         audioSource.clip = _weaponData.shotSound;
-        updateAmmoInfo();
     }
     private void swap()
     {
@@ -264,11 +270,17 @@ public class PlayerWeapons : MonoBehaviour
         }
         _weaponData.loadedAmmo--;
         _loadedAmmo.text = _weaponData.loadedAmmo.ToString();
-        fireflare.Play();
-        audioSource.PlayOneShot(audioSource.clip,audioSource.volume);
+        _pv.RPC("GunFireEffect", RpcTarget.AllBuffered);
         _playermovement.AddRecoil(_weaponData.RecoilX_min, _weaponData.RecoilY_min, _weaponData.RecoilX_max, _weaponData.RecoilY_max);
         
     }
+    [PunRPC]
+    private void GunFireEffect()
+    {
+        fireflare.Play();
+        audioSource.PlayOneShot(audioSource.clip,audioSource.volume);
+    }
+
 
     private void reloadCheck()
     {
