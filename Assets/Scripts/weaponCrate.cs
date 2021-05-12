@@ -18,7 +18,6 @@ public class weaponCrate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_pv.IsMine) return;
         if (Input.GetKeyDown(KeyCode.F))
         {
             if (playerInRange != null && playerInRange.weapons.Count < 3)
@@ -37,6 +36,8 @@ public class weaponCrate : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        PhotonView otherPV = other.GetComponent<PhotonView>();
+        if(otherPV != null && otherPV.IsMine)
         playerInRange = other.GetComponent<PlayerWeapons>();
     }
     private void OnTriggerExit(Collider other)
