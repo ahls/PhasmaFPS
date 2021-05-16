@@ -18,7 +18,6 @@ public class PlayerWeapons : MonoBehaviour
     private Transform firelocation;
     private float fireTimer;
     private AudioSource audioSource;
-    [SerializeField] private AudioSource audioHit;
 
 
     //weapon related
@@ -266,7 +265,7 @@ public class PlayerWeapons : MonoBehaviour
                     if (HP != null)
                     {
                         HP.takeDamageCaller(_weaponData.damage);
-                        audioHit.PlayOneShot(audioHit.clip);
+                        audioManager.i.playSound(SoundTypes.playerHit);
                         if(HP.gameObject.tag == "Player")
                         {
 
@@ -300,6 +299,7 @@ public class PlayerWeapons : MonoBehaviour
         {
             reloadingTimer = Time.time + _weaponData.reloadTime;
             isReloading = true;
+            audioManager.i.playSound(SoundTypes.reloadStart);
         }
         if(isReloading)
         {
@@ -316,6 +316,7 @@ public class PlayerWeapons : MonoBehaviour
         _weaponData.loadedAmmo = newMag;
         updateAmmoInfo();
         isReloading = false;
+        audioManager.i.playSound(SoundTypes.reloadEnd);
     }
     private void aimDownCheck()
     {
