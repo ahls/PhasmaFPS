@@ -2594,10 +2594,13 @@ MonoBehaviour:
   cam: {fileID: 4781233697626790051}
   ImpactPrefab: {fileID: 5839104130040790562, guid: 37da3d5f9703f0f44a2290ec043c3118,
     type: 3}
+  HitImpactPrefab: {fileID: 6187241942947274697, guid: ba8d814e8c6885a469b2723f630f5254,
+    type: 3}
+  audioHit: {fileID: 0}
   DefaultWeapon: {fileID: 2631050510808568688, guid: 3abadc88aa1007f43a90d688df329084,
     type: 3}
-  loadedAmmo: {fileID: 0}
-  totalAmmo: {fileID: 0}
+  _loadedAmmo: {fileID: 0}
+  _totalAmmo: {fileID: 0}
   cratePrefab: {fileID: 2537884384539045301, guid: 0c98f0cdcadb3cf41aded555bcf28f10,
     type: 3}
   leftHand: {fileID: 767374742}
@@ -2618,7 +2621,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   ps: {fileID: 0}
-  isPlayer: 0
   _healthDisplay: {fileID: 0}
 --- !u!114 &8824063147135747833
 MonoBehaviour:

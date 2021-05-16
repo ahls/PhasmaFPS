@@ -13,10 +13,12 @@ public class PlayerWeapons : MonoBehaviour
 
     //shooting
     [SerializeField] GameObject ImpactPrefab;
+    [SerializeField] GameObject HitImpactPrefab;
     private ParticleSystem fireflare;
     private Transform firelocation;
     private float fireTimer;
     private AudioSource audioSource;
+    [SerializeField] private AudioSource audioHit;
 
 
     //weapon related
@@ -264,6 +266,12 @@ public class PlayerWeapons : MonoBehaviour
                     if (HP != null)
                     {
                         HP.takeDamageCaller(_weaponData.damage);
+                        audioHit.PlayOneShot(audioHit.clip);
+                        if(HP.gameObject.tag == "Player")
+                        {
+
+                            Destroy(Instantiate(HitImpactPrefab, hit.point, Quaternion.LookRotation(transform.position - hit.point)), 0.5f);
+                        }
                     }
                 }
             }

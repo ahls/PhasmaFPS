@@ -55,13 +55,13 @@ public class PUN_TitleManager :  MonoBehaviourPunCallbacks
     #region buttons events
     public void OnCreateButton()
     {
-        PhotonNetwork.CreateRoom(_createIF.text, new RoomOptions { MaxPlayers = 2 });
         PhotonNetwork.NickName = _createPN.text;
+        PhotonNetwork.CreateRoom(_createIF.text, new RoomOptions { MaxPlayers = 2 });
     }
     public void OnJoinButton()
     {
-        PhotonNetwork.JoinRoom(_joinIF.text);
         PhotonNetwork.NickName = _joinPN.text;
+        PhotonNetwork.JoinRoom(_joinIF.text);
     }
     public void OnExitButton()
     {
