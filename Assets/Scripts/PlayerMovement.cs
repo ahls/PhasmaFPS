@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
         {
             jump(jumpHeight);
         }
-        else if (canWallJump && velocity.y > 0 && forwardMovement > 0 && !isGrounded && nearWall && Input.GetButtonDown("Jump"))
+        else if (canWallJump && !isGrounded && nearWall && Input.GetButtonDown("Jump"))
         {
             wallJump(jumpHeight, -100f);
             canWallJump = false;
