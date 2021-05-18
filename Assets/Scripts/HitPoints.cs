@@ -47,7 +47,7 @@ public class HitPoints : MonoBehaviour
         currentHP -= dmg;
         if (isPlayer && _pv.IsMine)
         {
-            _healthDisplay.text = ((int)currentHP).ToString();
+            _healthDisplay.text = ((int)Mathf.Ceil(currentHP)).ToString();
         }
 
         if (currentHP <= 0)

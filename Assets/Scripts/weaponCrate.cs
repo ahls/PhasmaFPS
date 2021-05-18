@@ -25,6 +25,7 @@ public class weaponCrate : MonoBehaviour
                 // other.GetComponent<PlayerWeapons>().updateWeapon(tempWeapon.GetComponent<weaponData>());
                 if (playerInRange.pickupWeapon(weaponInside.GetComponent<weaponData>()))
                 {//destroy only if the weapon is picked up
+                    playerInRange.WeaponPickupText.text = "";
                     _pv.RPC("RPC_PickedUp", RpcTarget.AllBuffered);
                 }
             }
