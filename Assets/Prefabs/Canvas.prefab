@@ -710,3 +710,4 @@ MonoBehaviour:
   CurrentAmmo: {fileID: 5634319193510636341}
   TotalAmmo: {fileID: 529110867}
   Health: {fileID: 285201075}
+  PickupText: {fileID: 4105587948328676467}
