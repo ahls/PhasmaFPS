@@ -12,6 +12,11 @@ public class HitPoints : MonoBehaviour
     public Text _healthDisplay;
     private PhotonView _pv;
 
+
+    public Image HitDisplay;
+    private float HitAlpha;
+    private const float HitScreenLerp = 0.1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +26,11 @@ public class HitPoints : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (HitDisplay != null && HitAlpha > 0f)
+        {
+            HitAlpha = Mathf.Lerp(HitAlpha, 0, HitScreenLerp);
+            HitDisplay.color = new Color(1f, 1f, 1f, HitAlpha);
+        }
     }
 
     #region setups
@@ -48,6 +57,11 @@ public class HitPoints : MonoBehaviour
         if (isPlayer && _pv.IsMine)
         {
             _healthDisplay.text = ((int)Mathf.Ceil(currentHP)).ToString();
+        }
+        if(HitDisplay != null)
+        {
+            HitAlpha += Mathf.Min(0.5f,dmg/10);
+            HitAlpha = Mathf.Min(HitAlpha, 1f);
         }
 
         if (currentHP <= 0)

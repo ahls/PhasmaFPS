@@ -344,8 +344,11 @@ public class PlayerWeapons : MonoBehaviour
         _loadedAmmo = cc.CurrentAmmo;
         _totalAmmo = cc.TotalAmmo;
         WeaponPickupText = cc.PickupText;
-        GetComponent<HitPoints>().isPlayer = true;
-        GetComponent<HitPoints>()._healthDisplay = cc.Health;
+
+        HitPoints hp = GetComponent<HitPoints>();
+        hp.isPlayer = true;
+        hp._healthDisplay = cc.Health;
+        hp.HitDisplay = cc.HitScreen;
 
     }
 }
