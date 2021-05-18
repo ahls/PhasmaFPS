@@ -58,7 +58,7 @@ public class PlayerWeapons : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_pv.IsMine) return;
+        if (!_pv.IsMine && PhotonNetwork.IsConnected) return;
         fireTimer -= Time.deltaTime;
         if (_weaponData != null)
         {
