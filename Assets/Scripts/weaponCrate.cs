@@ -7,7 +7,7 @@ public class weaponCrate : MonoBehaviour
     public GameObject weaponInside;
     public bool withinRange = false;
     public PlayerWeapons playerInRange;
-    private const string PICKUP_TEXT = "Press < b > F </ b > to pick up ";
+    private const string PICKUP_TEXT = "Press <b> F </b> to pick up ";
     private PhotonView _pv;
     // Start is called before the first frame update
     void Start()
