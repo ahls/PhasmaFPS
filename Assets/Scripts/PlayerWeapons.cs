@@ -5,6 +5,7 @@ using UnityEngine.Animations.Rigging;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using Photon.Pun;
+using TMPro;
 public class PlayerWeapons : MonoBehaviour
 {
     [SerializeField] Camera cam;
@@ -29,7 +30,7 @@ public class PlayerWeapons : MonoBehaviour
     [SerializeField] GameObject DefaultWeapon;
     [SerializeField] Text _loadedAmmo, _totalAmmo;
     [SerializeField] GameObject cratePrefab;
-
+    [HideInInspector] public TMP_Text WeaponPickupText;
     //riggings
     [SerializeField] Transform leftHand;
     [SerializeField] Transform rightHand;
@@ -342,6 +343,7 @@ public class PlayerWeapons : MonoBehaviour
 
         _loadedAmmo = cc.CurrentAmmo;
         _totalAmmo = cc.TotalAmmo;
+        WeaponPickupText = cc.PickupText;
         GetComponent<HitPoints>().isPlayer = true;
         GetComponent<HitPoints>()._healthDisplay = cc.Health;
 
