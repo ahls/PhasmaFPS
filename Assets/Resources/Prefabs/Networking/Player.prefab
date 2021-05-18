@@ -931,7 +931,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1790659804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.36, z: 1.47}
+  m_LocalPosition: {x: 0, y: 0.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5030771241900017711}
@@ -2413,7 +2413,7 @@ MonoBehaviour:
   wallCheck: {fileID: 1790659805}
   wallCheckHeight: 3
   groundDistance: 0.8
-  wallDistance: 1
+  wallDistance: 2
   groundMask:
     serializedVersion: 2
     m_Bits: 256
@@ -2603,6 +2603,7 @@ MonoBehaviour:
   _totalAmmo: {fileID: 0}
   cratePrefab: {fileID: 2537884384539045301, guid: 0c98f0cdcadb3cf41aded555bcf28f10,
     type: 3}
+  WeaponPickupText: {fileID: 0}
   leftHand: {fileID: 767374742}
   rightHand: {fileID: 1607063358}
   aimRig: {fileID: 1844020737}
