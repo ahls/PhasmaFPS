@@ -7,7 +7,7 @@ public class weaponCrate : MonoBehaviour
     public GameObject weaponInside;
     public bool withinRange = false;
     public PlayerWeapons playerInRange;
-
+    private const string PICKUP_TEXT = "Press < b > F </ b > to pick up ";
     private PhotonView _pv;
     // Start is called before the first frame update
     void Start()
@@ -37,13 +37,21 @@ public class weaponCrate : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PhotonView otherPV = other.GetComponent<PhotonView>();
-        if(otherPV != null && otherPV.IsMine)
-        playerInRange = other.GetComponent<PlayerWeapons>();
+        if (otherPV != null && otherPV.IsMine)
+        {
+            PlayerWeapons pw = other.GetComponent<PlayerWeapons>();
+            playerInRange = pw;
+            pw.WeaponPickupText.text = PICKUP_TEXT + weaponInside.name;
+
+        }
     }
     private void OnTriggerExit(Collider other)
     {
         if (playerInRange == other.GetComponent<PlayerWeapons>())
-            playerInRange = null;
+        {
+            playerInRange.WeaponPickupText.text = "";
+            playerInRange = null; 
+        }
     }
 
     [PunRPC]
